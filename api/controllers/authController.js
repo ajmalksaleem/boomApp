@@ -76,4 +76,15 @@ export const Checkuser = async(req,res,next)=>{
     message : "Authenticated User!",
     user
   })
-}
+};
+
+export const logoutUser = (req, res) => {
+  try {
+    res.clearCookie("tokensh").json({
+      success: true,
+      message: "Logged out successfully!",
+    });
+  } catch (error) {
+   next(error) 
+  }
+};

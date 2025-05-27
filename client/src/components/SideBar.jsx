@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { FaUserEdit, FaVideo, FaPlusCircle, FaWallet } from "react-icons/fa";
+import { FaUserEdit, FaVideo, FaPlusCircle, FaWallet, FaSignOutAlt } from "react-icons/fa";
+import { logoutUser } from "@/redux/auth";
 
 const SideBar = ({ showSidebar }) => {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
   return (
     <aside
       className={`bg-gray-100 text-black dark:bg-gray-800 dark:text-white p-4 md:block w-64 h-full transition-transform duration-300 md:translate-x-0 
@@ -41,15 +43,14 @@ const SideBar = ({ showSidebar }) => {
             <FaPlusCircle />
             Add new video
           </Link>
-        </ul>
-      </div>
-
-      <div className="mt-6">
-        <h3 className="font-semibold mb-2">Top Purchased</h3>
-        <ul className="space-y-1 text-sm">
-          <li>React Basics</li>
-          <li>Learn Tailwind</li>
-          <li>Next.js Crash Course</li>
+          <Link className="flex items-center gap-2 hover:bg-red-700 hover:text-white dark:hover:bg-red-400 dark:hover:text-white px-3 py-2 rounded cursor-pointer">
+            <FaVideo />
+            Purchased Videos
+          </Link>
+          <Link onClick={()=>dispatchEvent(logoutUser)} className="flex items-center gap-2 hover:bg-red-700 hover:text-white dark:hover:bg-red-400 dark:hover:text-white px-3 py-2 rounded cursor-pointer">
+            <FaSignOutAlt />
+            Logout
+          </Link>
         </ul>
       </div>
     </aside>
@@ -57,4 +58,3 @@ const SideBar = ({ showSidebar }) => {
 };
 
 export default SideBar;
-
